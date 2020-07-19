@@ -137,6 +137,21 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                     return true;
                 }
+                if (url.startsWith("whatsapp:")){
+                    Intent intent=new Intent(Intent.ACTION_DIAL,Uri.parse(url));
+                    startActivity(intent);
+                    return true;
+                }
+                if (url.startsWith("mailto:")){
+                    Intent f = new Intent(Intent.ACTION_SEND);
+                    f.putExtra(Intent.EXTRA_EMAIL, new String[]{"info@atnmedicare.com"});
+                    f.putExtra(Intent.EXTRA_SUBJECT, "Feedback from ATN Medicare");
+                    f.putExtra(Intent.EXTRA_TEXT, "Message: ");
+                    f.setType("message/email");
+                    f.setPackage("com.google.android.gm");
+                    startActivity(Intent.createChooser(f, "Send Feedback"));
+                    return true;
+                }
                 return false;
             }
 
